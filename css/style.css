@@ -1,0 +1,10 @@
+body {background-color:lightgrey}
+div#whole-window {font-family:arial;
+                  color:#404040;
+                  width:100%;
+                  text-align:left}
+section {display:block}
+section#left-side {float:left;
+                   width:35%;}
+section#right-side {float:right;
+                    width:65%;}
