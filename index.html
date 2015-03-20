@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Belton Zhong" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Testing Zipf's Law</title>
+  </head>
+  <script>
+  function selectData() {
+	  var element = document.getElementById("data-selector");
+	  var string = element.options[element.selectedIndex].text;
+	  var header = document.getElementById("data-title");
+	  header.innerHTML = string;
+  }
+  window.onload = function() {
+	  var select = document.getElementById("data-selector");
+	  var option;
+	  for(i = 1; i <= 10; i++) {
+		  option = document.createElement("option");
+		  option.text = "Dataset " + i;
+		  select.add(option);
+		}
+  }
+  </script>
+  <body>
+    <div id="left-side">
+      <h1>TESTING <b>ZIPF'S LAW</b></h1>
+      <p > George Kingsley Zipf observed that in languages, 
+      the most frequently used word occurs twice as 
+      often as the second most frequent word, three times 
+      as often as the third most frequent word, etc. 
+      This unexpectedly elegant distribution is called the 
+      Zipfian rank-size power law distribution where frequency 
+      is inversely proportional to rank.</p>
+      <p> This phenomenon has been further found in other types 
+      of data, including other language corpora, city populations 
+      (Auerbach 1913), corporation sizes, and income rankings. We 
+      want to find more instances of Zipf's. </p>
+      <p> To test for Zipf's, we regress log rank = a - b log value. 
+      Perfect Zipf's has a coefficient b = 1. Closer to 1 = closer to 
+      Zipf's. We plot the data on a log-log graph with log frequency and 
+      log rank to visually see how close it is to a perfect Zipfian 
+      distribution. </p> 
+      <p> This site is available on Github <a href="https://github.com/zipfs-law/zipfs-law.github.io">here</a>. </p>
+    </div>
+    
+    <div id="right-side">
+      <p>Select data </p>
+	    <form>  
+	      <select id="data-selector" onchange="selectData()"></select>
+	    </form>
+	    <h2 id="data-title">Dataset 1</h2>
+	    <ol id="graph">
+	      <li class="bar"></li>
+	      <li class="bar"></li>
+	      <li class="bar"></li>
+        <li class="bar"></li>
+        <li class="bar"></li>
+        <li class="bar"></li>
+        <li class="bar"></li>
+        <li class="bar"></li>
+        <li class="bar"></li>
+	    </ol>
+    </div>
+  </body>
+</html>
