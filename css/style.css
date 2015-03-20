@@ -21,11 +21,24 @@ h2 {color:#99938E;
     font-size:200%;}
 ol {color:#3F4D4D;
     list-style-type:none;
+    list-style-position:outside;
     padding-left:0px;
     counter-reset:item;}
-li {display:block;
-    padding-left:0px;
-    padding-top:5px;}
 li:before {content:counter(item); 
            counter-increment: item;
-           padding-right:10px;}
+           margin-left:-25px;
+           vertical-align:bottom;}
+.bar {margin-bottom:10px;
+	    color: #3FD4D;
+			padding-top:12px;
+			height:25px;
+			text-align:left;
+			vertical-align:bottom;
+			background-color:#063E53;
+			border-radius: 0px;
+			-webkit-animation-name:bar;
+			width:50%;}
+
+			
+			
+			
