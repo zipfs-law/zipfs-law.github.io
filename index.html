@@ -1,44 +1,32 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="author" content="Belton Zhong" />
+    <link rel="stylesheet" href="./css/style.css" />
     <title>Testing Zipf's Law</title>
   </head>  
   <body>
-    <div id="whole-window">
-       <section id="left-side">
-				<h1>Testing Zipf's Law</h1>
-				<p>This website displays data about Zipf's Law</p>
-				  <table>
-					  <tr>
-					    <th>City</th>
-					    <th>Population</th>
-					  </tr>
-					  <tr>
-					    <td>New York City, NY</td>
-					    <td>8.2 million</td>
-					  </tr>
-					  <tr>
-					    <td>Los Angeles, CA</td>
-					    <td>3.8 million</td>
-					   </tr>
-					   <tr>
-					     <td>Chicago, IL</td>
-					     <td>2.7 million</td>
-					   </tr>
-					   <tr>
-					     <td>Houston, TX</td>
-					     <td>2.1 million</td>
-					   </tr>
-				  </table>
-			</section>
-			
-			<section id="right-side">
-			  <h1>This is the right side.</h1>
-			  <p>Lorem ipsum</p>
-			</section>
-			
-		</div>
+    <div id="left-side">
+      <h1>TESTING <b>ZIPF'S LAW</b></h1>
+      <p > George Kingsley Zipf observed that in languages, 
+      the most frequently used word occurs twice as 
+      often as the second most frequent word, three times 
+      as often as the third most frequent word, etc. 
+      This unexpectedly elegant distribution is called the 
+      Zipfian rank-size power law distribution where frequency 
+      is inversely proportional to rank.</p>
+      <p> This phenomenon has been further found in other types 
+      of data, including other language corpora, city populations 
+      (Auerbach 1913), corporation sizes, and income rankings. We 
+      want to find more instances of Zipf's. </p>
+      <p> To test for Zipf's, we regress log rank = a - b log value. 
+      Perfect Zipf's has a coefficient b = 1. Closer to 1 = closer to 
+      Zipf's. We plot the data on a log-log graph with log frequency and 
+      log rank to visually see how close it is to a perfect Zipfian 
+      distribution. </p> 
+      <p> This site is available on Github <a href="https://github.com/zipfs-law/zipfs-law.github.io">here</a>. </p>
+    </div>
+    
   </body>
 </html>
