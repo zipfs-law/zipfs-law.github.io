@@ -1,9 +1,27 @@
 {
 	"names": [
-		"East Germany 1955"
+		"East Germany 1955",
+		"East Germany 1963",
+		"East Germany 1965",
+		"East Germany 1968",
+		"East Germany 1973",
+		"East Germany 1974",
+		"East Germany 1977",
+		"East Germany 1982",
+		"East Germany 1983",
+		"East Germany 1985"
 	],
 
 	"paths": [
-		"East1955.json"
+		"East1955.json",
+		"East1963.json",
+		"East1965.json",
+		"East1968.json",
+		"East1973.json",
+		"East1974.json",
+		"East1977.json",
+		"East1982.json",
+		"East1983.json",
+		"East1985.json"
 	]
 }
