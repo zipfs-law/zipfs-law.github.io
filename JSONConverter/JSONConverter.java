@@ -29,7 +29,7 @@ public class JSONConverter {
     String trendLine[] = new String[2];
 
     int ctr = 0;
-    while(ctr < 214) {
+    while(ctr < numLines) {
       String line = input.nextLine();
       String[] data = line.split("\t");
       names[ctr] = data[0];
