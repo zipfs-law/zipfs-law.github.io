@@ -49,28 +49,28 @@ public class JSONConverter {
     writer.println();
 
     writer.println("\t\"pops\": [");
-    for(int i = 0; i < numLines; i++)
+    for(int i = 0; i < numLines - 1; i++)
       writer.println("\t\t\"" + pops[i] + "\",");
     writer.println("\t\t\"" + pops[numLines - 1] + "\"");
     writer.println("\t],");
     writer.println();
     
     writer.println("\t\"logPops\": [");
-    for(int i = 0; i < numLines; i++)
+    for(int i = 0; i < numLines - 1; i++)
       writer.println("\t\t\"" + logPops[i] + "\",");
     writer.println("\t\t\"" + logPops[numLines - 1] + "\"");
     writer.println("\t],");
     writer.println();
 
     writer.println("\t\"ranks\": [");
-    for(int i = 0; i < numLines; i++)
+    for(int i = 0; i < numLines - 1; i++)
       writer.println("\t\t\"" + ranks[i] + "\",");
     writer.println("\t\t\"" + ranks[numLines - 1] + "\"");
     writer.println("\t],");
     writer.println();
 
     writer.println("\t\"logRanks\": [");
-    for(int i = 0; i < numLines; i++)
+    for(int i = 0; i < numLines - 1; i++)
       writer.println("\t\t\"" + logRanks[i] + "\",");
     writer.println("\t\t\"" + logRanks[numLines - 1] + "\"");
     writer.println("\t]");
