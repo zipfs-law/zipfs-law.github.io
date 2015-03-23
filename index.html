@@ -6,57 +6,162 @@
     <link rel="stylesheet" href="./css/style.css" />
     <title>Testing Zipf's Law</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Pontano Sans|Actor' rel='stylesheet' type='text/css'>
     <script>
-		  function selectData() {
-		    var element = document.getElementById("data-selector");
-		    var string = element.options[element.selectedIndex].text;
-		    var header = document.getElementById("data-title");
-		    header.innerHTML = string;
-		    //drawGraph();
-		  }
-		  
-		  window.onload = function() {
-		    var select = document.getElementById("data-selector");
-		    var xobj = new XMLHttpRequest();
-		    $.getJSON('/data/index.json', function(data) {
-			    console.log(data);
-		    });
+      window.onload = function() {
+        var select = document.getElementById("data-selector");
+        var option = document.createElement("option");
+        option.text = "Select a dataset to begin";
+        select.add(option);
+        $.getJSON('/data/index.json', function(data) {
+          for(i = 0; i < data.names.length; i++) {
+            option = document.createElement("option");
+            option.text = data.names[i];
+            option.value = data.paths[i];
+            select.add(option);
+          }
+        });
+        //initGraph();
+      }
+
+      function clearGraph() {
+    	  var canvas = document.getElementById("graph");
+    	  var context = canvas.getContext("2d");
+    	  context.beginPath();
+    	  context.clearRect(0, 0, canvas.width, canvas.height)
+      }
+      
+	    function selectData() {
+	      var selector = document.getElementById("data-selector");
+	      var string = selector.options[selector.selectedIndex].text;
+	      var header = document.getElementById("data-title");
+	      header.innerHTML = string;
+	      if(string == "Select a dataset to begin")
+		      clearGraph();
+	      else
+	        drawGraph();
+	    }
+	    
+	    function initGraph() {
+		    clearGraph();
+	      var graph = document.getElementById("graph");
+	      var context = graph.getContext("2d");
+	      context.save();
+	      //Draw axes
+	      context.strokeStyle = "#99938E";
+	      context.strokeRect(60, 0, 600, 340);
+	
+	      //Draw x-axis label
+	      context.fillStyle = "#99938E";
+	      context.font = "16px Arial";
+	      context.textAlign = "center";
+	      context.textBaseline = "bottom";
+	      context.fillText("ln(Population)", 325, 395);
+	
+	      //Draw y-axis label
+	      context.save();
+	      context.rotate(-Math.PI / 2);
+	      context.textBaseline = "top";
+	      context.fillText("ln(Rank)", -175, 5);
+	      context.restore();
+	    }
+
+	    function labelAxes(data) {
+	  	  var canvas = document.getElementById("graph");
+	      var context = canvas.getContext("2d");
+	      context.strokeStyle = "#99938E";
+	      context.fillStyle = "#99938E";
+
+	      var startTick = Math.ceil(data.logRanks[data.logRanks.length - 1]);
+	      var endTick = 0;
+	      var max = startTick + .5;
+	      var min = -.5;
+	      
+	      context.textBaseline = "middle";
+	      context.textAlign = "right";
+	                          
+	      for(i = startTick; i >= endTick; i--) {
+	        var height = (max - i) / (max - min) * 340;
+	        context.moveTo(60, height);
+	        context.lineTo(70, height);
+	        context.stroke();
+	        
+	        context.fillText(i, 55, height);
+	      }
+	      
+	      startTick = Math.ceil(data.logPops[0]);
+	      endTick = Math.floor(data.logPops[data.logPops.length - 1]);
+	      max = startTick + .5;
+	      min = endTick - .5;
+	      
+	      context.textBaseline = "top";
+	      context.textAlign = "center";
+	      
+	      for(i = startTick; i >= endTick; i--) {
+	        var length = 600 - ((max - i) / (max - min) *  540);
+	        context.moveTo(length, 340);
+	        context.lineTo(length, 330);
+	        context.stroke();
+	        
+	        context.fillText(i, length, 345);
+	      }
+	    }
+
+	    function drawPoints(data) {
+	      var canvas = document.getElementById("graph");
+	      var context = canvas.getContext("2d");
+	      context.fillStyle = "#063E53";
+			    
+	      var numPoints = data.logRanks.length;
+	      var maxY = Math.ceil(data.logRanks[data.logRanks.length - 1]) + .5;
+	      var minY = -.5;
+	      var maxX = Math.ceil(data.logPops[0]) + .5;
+	      var minX = Math.floor(data.logPops[data.logPops.length - 1]) - .5;
+	      
+	      for(i = 0; i < numPoints; i++) {
+	    	  var yCoordinate = (maxY - data.logRanks[i]) / (maxY - minY) * 340;
+	    	  var xCoordinate = 600 - ((maxX - data.logPops[i]) / (maxX - minX) * 540);
+	    	  context.fillRect(xCoordinate - 2, yCoordinate - 2, 4, 4);
+	      }
+	    }
+
+	    function drawTrendLine(data) {
+	      var canvas = document.getElementById("graph");
+	      var context = canvas.getContext("2d");
+
+
+	      var maxY = Math.ceil(data.logRanks[data.logRanks.length - 1]) + .5;
+		    var minY = -.5;
+	      var maxX = Math.ceil(data.logPops[0]) + .5;
+	      var minX = Math.floor(data.logPops[data.logPops.length - 1]) - .5;
+	      
+	      var m = data.trendLine[0];
+	      var b = data.trendLine[1];
+	      var yInt = (b * 1) + (m * minX);
+	      var xInt = (minY - b) / m;
+	      
+	      var y = 340 - ((yInt - minY) / (maxY - minY) * 340);
+	      context.moveTo(60, y);
+	      var x = ((xInt - minX) / (maxX - minX) * 540) + 60;
+	      context.lineTo(x, 340);
+	      context.stroke();
+	    }
+	    
+	    function drawGraph() {
 		    initGraph();
-		    //drawGraph();
-		  }
-		  
-		  function initGraph() {
-			  var graph = document.getElementById("graph");
-			  var context = graph.getContext("2d");
-
-			  //Draw axes
-			  context.strokeStyle = "#99938E";
-			  context.strokeRect(60, 0, 600, 355);
-
-			  //Draw x-axis label
-			  context.fillStyle = "#99938E";
-			  context.font = "16px Arial";
-			  context.textAlign = "center";
-			  context.textBaseline = "bottom";
-			  context.fillText("ln(Population)", 325, 395);
-
-			  //Draw y-axis label
-			  context.save();
-			  context.rotate(-Math.PI / 2);
-			  context.textBaseline = "top";
-			  context.fillText("ln(Rank)", -175, 5);
-			  context.restore();
-		  }
-
-		  function drawGraph() {
-			  var dataSelector = document.getElementById("data-selector");
-			  var datasetName = dataSelector.options[dataSelector.selectedIndex].value;
-			  console.log(datasetName);
-		  }
-	  </script>
+	      var dataSelector = document.getElementById("data-selector");
+	      var fileName = dataSelector.options[dataSelector.selectedIndex].value;
+	      $.getJSON("/data/" + fileName, function(data) {
+	    	  labelAxes(data);
+	    	  drawPoints(data);
+	    	  drawTrendLine(data);
+	      });
+	    }
+    </script>
   </head>
  
   <body>
+
     <div id="left-side">
       <h1>TESTING <b>ZIPF'S LAW</b></h1>
       <p > George Kingsley Zipf observed that in languages, 
@@ -79,15 +184,15 @@
     </div>
     
     <div id="right-side">
-      <p>Select data </p>
 	    <form>  
 	      <select id="data-selector" onchange="selectData()">
 	      </select>
 	    </form>
-	    <h2 id="data-title">Dataset 1</h2>
+	    <h2 id="data-title">Select a dataset to begin</h2>
 	    <canvas id="graph" width="600" height="400">
 	      
 	    </canvas>
     </div>
+    <script src="./js/app.js"</script>
   </body>
 </html>
