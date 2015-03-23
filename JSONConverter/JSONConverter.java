@@ -26,9 +26,10 @@ public class JSONConverter {
     String logPops[] = new String[numLines];
     String ranks[] = new String[numLines];
     String logRanks[] = new String[numLines];
-    
+    String trendLine[] = new String[2];
+
     int ctr = 0;
-    while(input.hasNext()) {
+    while(ctr < 214) {
       String line = input.nextLine();
       String[] data = line.split("\t");
       names[ctr] = data[0];
@@ -38,7 +39,10 @@ public class JSONConverter {
       logRanks[ctr] = data[4];
       ctr++;
     }
-    
+    String line[] = input.nextLine().split("\t");
+    trendLine[0] = line[0];
+    trendLine[1] = line[1];    
+
     writer.println("{");
 
     writer.println("\t\"names\": [");
@@ -73,6 +77,13 @@ public class JSONConverter {
     for(int i = 0; i < numLines - 1; i++)
       writer.println("\t\t\"" + logRanks[i] + "\",");
     writer.println("\t\t\"" + logRanks[numLines - 1] + "\"");
+    writer.println("\t],");
+    writer.println();
+
+    writer.println("\t\"trendLine\": [");
+    for(int i = 0; i < 1; i++)
+      writer.println("\t\t\"" + trendLine[i] + "\",");
+    writer.println("\t\t\"" + trendLine[1] + "\"");
     writer.println("\t]");
     
     writer.println("}");

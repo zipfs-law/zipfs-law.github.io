@@ -13,7 +13,6 @@
         option.text = "Select a dataset to begin";
         select.add(option);
         $.getJSON('/data/index.json', function(data) {
-          //data.names    data.paths
           for(i = 0; i < data.names.length; i++) {
             option = document.createElement("option");
             option.text = data.names[i];
@@ -38,7 +37,7 @@
 	
 	      //Draw axes
 	      context.strokeStyle = "#99938E";
-	      context.strokeRect(60, 0, 600, 355);
+	      context.strokeRect(60, 0, 600, 340);
 	
 	      //Draw x-axis label
 	      context.fillStyle = "#99938E";
@@ -54,12 +53,95 @@
 	      context.fillText("ln(Rank)", -175, 5);
 	      context.restore();
 	    }
-	
+
+	    function labelAxes(data) {
+	  	  var canvas = document.getElementById("graph");
+	      var context = canvas.getContext("2d");
+	      context.strokeStyle = "#99938E";
+	      context.fillStyle = "#99938E";
+
+	      var startTick = Math.ceil(data.logRanks[data.logRanks.length - 1]);
+	      var endTick = 0;
+	      var max = startTick + .5;
+	      var min = -.5;
+	      
+	      context.textBaseline = "middle";
+	      context.textAlign = "right";
+	                          
+	      for(i = startTick; i >= endTick; i--) {
+	        var height = (max - i) / (max - min) * 340;
+	        context.moveTo(60, height);
+	        context.lineTo(70, height);
+	        context.stroke();
+	        
+	        context.fillText(i, 55, height);
+	      }
+	      
+	      startTick = Math.ceil(data.logPops[0]);
+	      endTick = Math.floor(data.logPops[data.logPops.length - 1]);
+	      max = startTick + .5;
+	      min = endTick - .5;
+	      
+	      context.textBaseline = "top";
+	      context.textAlign = "center";
+	      
+	      for(i = startTick; i >= endTick; i--) {
+	        var length = 600 - ((max - i) / (max - min) *  540);
+	        context.moveTo(length, 340);
+	        context.lineTo(length, 330);
+	        context.stroke();
+	        
+	        context.fillText(i, length, 345);
+	      }
+	    }
+
+	    function drawPoints(data) {
+	      var canvas = document.getElementById("graph");
+	      var context = canvas.getContext("2d");
+	      context.fillStyle = "#063E53";
+			    
+	      var numPoints = data.logRanks.length;
+	      var maxY = Math.ceil(data.logRanks[data.logRanks.length - 1]) + .5;
+	      var minY = -.5;
+	      var maxX = Math.ceil(data.logPops[0]) + .5;
+	      var minX = Math.floor(data.logPops[data.logPops.length - 1]) - .5;
+	      
+	      for(i = 0; i < numPoints; i++) {
+	    	  var yCoordinate = (maxY - data.logRanks[i]) / (maxY - minY) * 340;
+	    	  var xCoordinate = 600 - ((maxX - data.logPops[i]) / (maxX - minX) * 540);
+	    	  context.fillRect(xCoordinate - 2, yCoordinate - 2, 4, 4);
+	      }
+	    }
+
+	    function drawTrendLine(data) {
+	      var canvas = document.getElementById("graph");
+	      var context = canvas.getContext("2d");
+
+
+	      var maxY = Math.ceil(data.logRanks[data.logRanks.length - 1]) + .5;
+		    var minY = -.5;
+	      var maxX = Math.ceil(data.logPops[0]) + .5;
+	      var minX = Math.floor(data.logPops[data.logPops.length - 1]) - .5;
+	      
+	      var m = data.trendLine[0];
+	      var b = data.trendLine[1];
+	      var yInt = (b * 1) + (m * minX);
+	      var xInt = (minY - b) / m;
+	      
+	      var y = 340 - ((yInt - minY) / (maxY - minY) * 340);
+	      context.moveTo(60, y);
+	      var x = ((xInt - minX) / (maxX - minX) * 540) + 60;
+	      context.lineTo(x, 340);
+	      context.stroke();
+	    }
+	    
 	    function drawGraph() {
 	      var dataSelector = document.getElementById("data-selector");
 	      var fileName = dataSelector.options[dataSelector.selectedIndex].value;
 	      $.getJSON("/data/" + fileName, function(data) {
-	    	  console.log(data);
+	    	  labelAxes(data);
+	    	  drawPoints(data);
+	    	  drawTrendLine(data);
 	      });
 	    }
     </script>
