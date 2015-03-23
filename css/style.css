@@ -4,7 +4,7 @@ div#left-side {width:35%;
                margin-left:5%;
                margin-right:5%;
                float:left;
-               font-family:'Pontano Sans';}
+               font-family:'Pontano Sans', sans-serif;}
 h1 {color:#504C48;
     font-size:300%;}
 b {color:#063E53;}
