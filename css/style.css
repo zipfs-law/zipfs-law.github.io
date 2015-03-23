@@ -1,8 +1,10 @@
-body {background-color:#151818;
-      font-family:'Helvetica Neue', 'Arial', 'Georgia';}
-div#left-side {width:40%;
+body {background-color:#151818;}
+div#left-side {width:35%;
                text-align:left;
-               float:left;}
+               margin-left:5%;
+               margin-right:5%;
+               float:left;
+               font-family:'Pontano Sans';}
 h1 {color:#504C48;
     font-size:300%;}
 b {color:#063E53;}
@@ -15,10 +17,11 @@ a:hover {border-bottom: 1px solid #5B7171;}
 div#right-side {width:55%;
                 text-align:left;
                 float:right;
-                margin-top:1%;}
+                margin-top:3%;
+                font-family:'Arial';}
 select {width:75%;}
 h2 {color:#99938E;
-    font-size:200%;}
+    font-size:175%;}
 ol {color:#3F4D4D;
     list-style-type:none;
     list-style-position:outside;
