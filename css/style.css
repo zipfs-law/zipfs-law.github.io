@@ -4,7 +4,7 @@ div#left-side {width:35%;
                margin-left:5%;
                margin-right:5%;
                float:left;
-               font-family:'Pontano Sans', sans-serif;}
+               font-family:Pontano Sans, sans-serif;}
 h1 {color:#504C48;
     font-size:300%;}
 b {color:#063E53;}
@@ -18,7 +18,7 @@ div#right-side {width:55%;
                 text-align:left;
                 float:right;
                 margin-top:3%;
-                font-family:'Arial';}
+                font-family:Arial;}
 select {width:75%;}
 h2 {color:#99938E;
     font-size:175%;}
