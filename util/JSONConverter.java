@@ -1,3 +1,7 @@
+/*
+ * Authored by Belton Zhong
+ * 3/22/2015
+ */
 import java.io.*;
 import java.util.*;
 
