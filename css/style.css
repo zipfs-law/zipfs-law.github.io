@@ -38,7 +38,7 @@ li:before {content:counter(item);
 			border-radius: 0px;
 			-webkit-animation-name:bar;
 			width:50%;}
+canvas#graph {border:1px solid #99938E;}
 
-			
 			
 			
