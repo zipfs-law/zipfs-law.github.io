@@ -8,15 +8,15 @@ import java.util.*;
 public class JSONConverter {
   public static void main(String[] args) {
     String filename = args[0];
-    String output = args[1];
-    int numLines = Integer.parseInt(args[2]);
+    int numLines = Integer.parseInt(args[1]);
+    int numTrendLines= Integer.parseInt(args[2]);
 
     Scanner input = null;
     PrintWriter writer = null;
     
     try {
-      input = new Scanner(new File(filename));
-      writer = new PrintWriter(output, "UTF-8");
+      input = new Scanner(new File("../data/raw/" + filename + ".tsv"));
+      writer = new PrintWriter("../data/" + filename + ".json", "UTF-8");
     } catch(Exception e) {
       e.printStackTrace();
     }
@@ -26,7 +26,8 @@ public class JSONConverter {
     String logPops[] = new String[numLines];
     String ranks[] = new String[numLines];
     String logRanks[] = new String[numLines];
-    String trendLine[] = new String[2];
+    String datasets[] = new String[numLines];
+    String trendLine[] = new String[2 * numTrendLines];
 
     int ctr = 0;
     while(ctr < numLines) {
@@ -37,11 +38,14 @@ public class JSONConverter {
       logPops[ctr] = data[2];
       ranks[ctr] = data[3];
       logRanks[ctr] = data[4];
+      datasets[ctr] = data[5];
       ctr++;
     }
-    String line[] = input.nextLine().split("\t");
-    trendLine[0] = line[0];
-    trendLine[1] = line[1];    
+    for(int i = 0; i < numTrendLines; i++) {
+      String line[] = input.nextLine().split("\t");
+      trendLine[2 * i] = line[0];
+      trendLine[2 * i + 1] = line[1];    
+    }
 
     writer.println("{");
 
@@ -80,10 +84,20 @@ public class JSONConverter {
     writer.println("\t],");
     writer.println();
 
-    writer.println("\t\"trendLine\": [");
-    for(int i = 0; i < 1; i++)
-      writer.println("\t\t\"" + trendLine[i] + "\",");
-    writer.println("\t\t\"" + trendLine[1] + "\"");
+    writer.println("\t\"datasets\": [");
+    for(int i = 0; i < numLines - 1; i++)
+      writer.println("\t\t\"" + datasets[i] + "\",");
+    writer.println("\t\t\"" + datasets[numLines - 1] + "\"");
+    writer.println("\t],");
+    writer.println();
+
+    writer.println("\t\"trendLines\": [");
+    for(int i = 0; i < numTrendLines - 1; i++) {
+      writer.println("\t\t\"" + trendLine[2 * i] + "\",");
+      writer.println("\t\t\"" + trendLine[2 * i + 1] + "\",");
+    }
+    writer.println("\t\t\"" + trendLine[2 * (numTrendLines - 1)] + "\",");
+    writer.println("\t\t\"" + trendLine[2 * (numTrendLines - 1) + 1] + "\"");
     writer.println("\t]");
     
     writer.println("}");
