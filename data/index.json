@@ -9,7 +9,9 @@
 		"East Germany 1977",
 		"East Germany 1982",
 		"East Germany 1983",
-		"East Germany 1985"
+		"East Germany 1985",
+		"West Germany 1977",
+		"Artificial Unified Germany 1977"
 	],
 
 	"paths": [
@@ -22,6 +24,8 @@
 		"East1977.json",
 		"East1982.json",
 		"East1983.json",
-		"East1985.json"
+		"East1985.json",
+		"West1977.json",
+		"Unified1977.json"
 	]
 }
