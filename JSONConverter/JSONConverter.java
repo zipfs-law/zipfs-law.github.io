@@ -20,7 +20,8 @@ public class JSONConverter {
     } catch(Exception e) {
       e.printStackTrace();
     }
-
+    
+    String legend[] = new String[numTrendLines];
     String names[] = new String[numLines];
     String pops[] = new String[numLines];
     String logPops[] = new String[numLines];
@@ -29,6 +30,10 @@ public class JSONConverter {
     String datasets[] = new String[numLines];
     String trendLine[] = new String[2 * numTrendLines];
 
+    for(int num = 0; num < numTrendLines; num++) {
+      String line = input.nextLine();
+      legend[num] = line;
+    }
     int ctr = 0;
     while(ctr < numLines) {
       String line = input.nextLine();
@@ -48,6 +53,13 @@ public class JSONConverter {
     }
 
     writer.println("{");
+
+    writer.println("\t\"legendNames\": [");
+    for(int i = 0; i < numTrendLines - 1; i++)
+      writer.println("\t\t\"" + legend[i] + "\",");
+    writer.println("\t\t\"" + legend[numTrendLines - 1] + "\"");
+    writer.println("\t],");
+    writer.println();
 
     writer.println("\t\"names\": [");
     for(int i = 0; i < numLines - 1; i++)

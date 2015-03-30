@@ -151,6 +151,22 @@
 		      context.stroke();
 		    }
 	    }
+
+	    function drawLegend(data) {
+	      var canvas = document.getElementById("graph");
+	      var context = canvas.getContext("2d");
+	      var colors = ["#063E53", "#E68A2E", "#99938E"];  
+
+	      for(i = 0; i < data.legendNames.length; i++) {
+		      context.font = "10px Arial";
+	    	  context.textBaseline = "top";
+	    	  context.textAlign = "right";
+	        context.fillStyle = "#99938E";
+	    	  context.fillText(data.legendNames[i], 570, 5 + i * 10);
+	    	  context.fillStyle = colors[i];
+	    	  context.fillRect(572, 7 + i * 10, 8, 8);
+	      }
+	    }
 	    
 	    function drawGraph() {
 		    initGraph();
@@ -160,6 +176,7 @@
 	    	  labelAxes(data);
 	    	  drawPoints(data);
 	    	  drawTrendLine(data);
+	    	  drawLegend(data);
 	      });
 	    }
     </script>

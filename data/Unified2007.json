@@ -1,4 +1,10 @@
 {
+	"legendNames": [
+		"West Germany",
+		"East Germany",
+		"Unified Germany"
+	],
+
 	"names": [
 		"Berlin",
 		"Hamburg",
