@@ -15,7 +15,10 @@
 		"Unified Germany 2004",
 		"Unified Germany 2005",
 		"Unified Germany 2006",
-		"Unified Germany 2007"
+		"Unified Germany 2007",
+		"Unified Germany 2008",
+		"Unified Germany 2009",
+		"Unified Germany 2010"
 	],
 
 	"paths": [
@@ -34,6 +37,9 @@
 		"Unified2004.json",
 		"Unified2005.json",
 		"Unified2006.json",
-		"Unified2007.json"
+		"Unified2007-1.json",
+		"Unified2008.json",
+		"Unified2009.json",
+		"Unified2010.json"
 	]
 }
