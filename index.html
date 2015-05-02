@@ -122,7 +122,7 @@
 	      for(i = 0; i < numPoints; i++) {
 	    	  var yCoordinate = (maxY - data.logRanks[i]) / (maxY - minY) * 340;
 	    	  var xCoordinate = 600 - ((maxX - data.logPops[i]) / (maxX - minX) * 540);
-	    	  context.fillStyle = colors[data.datasets[i]];
+	    	  context.fillStyle = colors[0];
 	    	  context.fillRect(xCoordinate - 2, yCoordinate - 2, 4, 4);
 	      }
 	    }
