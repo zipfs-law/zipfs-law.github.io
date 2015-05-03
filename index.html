@@ -162,11 +162,15 @@
 		      context.font = "10px Arial";
 	    	  context.textBaseline = "top";
 	    	  context.textAlign = "right";
-	        context.fillStyle = "#99938E";
+	          context.fillStyle = "#99938E";
 	    	  context.fillText(data.legendNames[i], 570, 5 + i * 10);
 	    	  context.fillStyle = colors[i];
 	    	  context.fillRect(572, 7 + i * 10, 8, 8);
 	      }
+
+	      context.fillStyle = "#99938E";
+	      context.fillText("b = " + data.trendLines[0], 570, 15);
+	      
 	    }
 	    
 	    function drawGraph() {
