@@ -67,7 +67,7 @@
 	    }
 
 	    function labelAxes(data) {
-	  	  var canvas = document.getElementById("graph");
+	      var canvas = document.getElementById("graph");
 	      var context = canvas.getContext("2d");
 	      context.strokeStyle = "#99938E";
 	      context.fillStyle = "#99938E";
@@ -159,17 +159,17 @@
 	      var colors = ["#063E53", "#E68A2E", "#99938E"];  
 
 	      for(i = 0; i < data.legendNames.length; i++) {
-		      context.font = "10px Arial";
+		  context.font = "16px Arial";
 	    	  context.textBaseline = "top";
 	    	  context.textAlign = "right";
 	          context.fillStyle = "#99938E";
 	    	  context.fillText(data.legendNames[i], 570, 5 + i * 10);
 	    	  context.fillStyle = colors[i];
-	    	  context.fillRect(572, 7 + i * 10, 8, 8);
+	    	  context.fillRect(573, 6 + i * 10, 13, 13);
 	      }
 
 	      context.fillStyle = "#99938E";
-	      context.fillText("b = " + data.trendLines[0], 570, 15);
+	      context.fillText("b = " + data.trendLines[0], 570, 24);
 	      
 	    }
 	    
